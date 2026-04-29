@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS - A Journey of Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="max-w-4xl mx-auto p-6">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-rose-600">Propose Love CMS</h1>
+            <a href="/" target="_blank" class="text-blue-500 hover:underline">View Website &rarr;</a>
+        </div>
+
+        <div id="status-message" class="hidden mb-6 p-4 rounded-lg"></div>
+
+        <form id="cms-form" class="space-y-8">
+            <!-- Hero Section -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Hero Section</h2>
+                <div class="grid gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                        <input type="text" id="hero-title" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Subtitle</label>
+                        <input type="text" id="hero-subtitle" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <textarea id="hero-description" rows="3" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proposal Section -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Proposal Section</h2>
+                <div class="grid gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Target Name</label>
+                        <input type="text" id="proposal-targetName" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                        <textarea id="proposal-message" rows="3" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Question</label>
+                        <input type="text" id="proposal-question" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Raw JSON Editor (For complex arrays like Timeline, Gallery, Reasons) -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Advanced: Edit Arrays (JSON)</h2>
+                <p class="text-sm text-gray-500 mb-2">Edit Timeline, Gallery, and Reasons directly in JSON format below. Make sure the JSON syntax is valid (no trailing commas, use double quotes).</p>
+                <textarea id="raw-json" rows="20" class="w-full font-mono text-sm border border-gray-300 rounded-md p-4 bg-gray-50 focus:ring-rose-500 focus:border-rose-500"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="sticky bottom-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200 flex justify-end">
+                <button type="submit" id="save-btn" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-6 rounded-md transition-colors flex items-center">
+                    <span>Simpan Data & Push ke GitHub</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="apps/assets/js/cms.js"></script>
+</body>
+</html>
