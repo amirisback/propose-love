@@ -1,9 +1,25 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // Fetch data
-        const response = await fetch('apps/data/content.json');
-        if (!response.ok) throw new Error('Failed to load content');
-        const data = await response.json();
+        // Fetch all data in parallel
+        const [heroRes, timelineRes, galleryRes, reasonsRes, proposalRes] = await Promise.all([
+            fetch('apps/data/hero.json'),
+            fetch('apps/data/timeline.json'),
+            fetch('apps/data/gallery.json'),
+            fetch('apps/data/reasons.json'),
+            fetch('apps/data/proposal.json')
+        ]);
+        
+        if (!heroRes.ok || !timelineRes.ok || !galleryRes.ok || !reasonsRes.ok || !proposalRes.ok) {
+            throw new Error('Failed to load some content files');
+        }
+
+        const data = {
+            hero: await heroRes.json(),
+            timeline: await timelineRes.json(),
+            gallery: await galleryRes.json(),
+            reasons: await reasonsRes.json(),
+            proposal: await proposalRes.json()
+        };
         
         // Populate Hero
         document.getElementById('hero-subtitle').textContent = data.hero.subtitle;

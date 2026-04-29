@@ -4,7 +4,6 @@ const path = require('path');
 const { exec } = require('child_process');
 
 const PORT = 3000;
-const DATA_FILE = path.join(__dirname, 'apps', 'data', 'content.json');
 
 const MIME_TYPES = {
     '.html': 'text/html',
@@ -27,39 +26,48 @@ const server = http.createServer((req, res) => {
         });
         req.on('end', () => {
             try {
-                // Validate JSON
-                JSON.parse(body);
+                // Parse the merged payload
+                const payload = JSON.parse(body);
                 
-                // Save to file
-                fs.writeFile(DATA_FILE, body, (err) => {
-                    if (err) {
-                        res.writeHead(500, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ success: false, error: 'Failed to write file' }));
-                        return;
-                    }
+                // Save to multiple files
+                const savePromises = [
+                    fs.promises.writeFile(path.join(__dirname, 'apps/data/hero.json'), JSON.stringify(payload.hero, null, 2)),
+                    fs.promises.writeFile(path.join(__dirname, 'apps/data/timeline.json'), JSON.stringify(payload.timeline, null, 2)),
+                    fs.promises.writeFile(path.join(__dirname, 'apps/data/gallery.json'), JSON.stringify(payload.gallery, null, 2)),
+                    fs.promises.writeFile(path.join(__dirname, 'apps/data/reasons.json'), JSON.stringify(payload.reasons, null, 2)),
+                    fs.promises.writeFile(path.join(__dirname, 'apps/data/proposal.json'), JSON.stringify(payload.proposal, null, 2))
+                ];
 
-                    // Auto-commit to GitHub
-                    console.log('File saved. Triggering git commit...');
-                    const gitCmd = `git add apps/data/content.json && git commit -m "Update content via CMS" && git push`;
-                    exec(gitCmd, (error, stdout, stderr) => {
-                        if (error) {
-                            console.error(`Git error: ${error.message}`);
+                Promise.all(savePromises)
+                    .then(() => {
+                        // Auto-commit to GitHub
+                        console.log('Semua file berhasil disimpan. Memicu proses git commit...');
+                        const gitCmd = `git add apps/data/*.json && git commit -m "Update konten via CMS" && git push`;
+                        exec(gitCmd, (error, stdout, stderr) => {
+                            if (error) {
+                                console.error(`Git error: ${error.message}`);
+                                res.writeHead(200, { 'Content-Type': 'application/json' });
+                                res.end(JSON.stringify({ 
+                                    success: true, 
+                                    message: 'Disimpan berhasil, namun gagal push ke GitHub secara otomatis.' 
+                                }));
+                                return;
+                            }
+                            
+                            console.log(`Git stdout: ${stdout}`);
                             res.writeHead(200, { 'Content-Type': 'application/json' });
-                            res.end(JSON.stringify({ 
-                                success: true, 
-                                message: 'Saved successfully, but failed to push to GitHub. You might need to push manually.' 
-                            }));
-                            return;
-                        }
-                        
-                        console.log(`Git stdout: ${stdout}`);
-                        res.writeHead(200, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ success: true, message: 'Saved and pushed to GitHub!' }));
+                            res.end(JSON.stringify({ success: true, message: 'Berhasil disimpan dan di-push ke GitHub!' }));
+                        });
+                    })
+                    .catch(err => {
+                        console.error("Failed to write to some files", err);
+                        res.writeHead(500, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ success: false, error: 'Failed to write ke file JSON' }));
                     });
-                });
+
             } catch (e) {
                 res.writeHead(400, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: false, error: 'Invalid JSON' }));
+                res.end(JSON.stringify({ success: false, error: 'Invalid JSON format' }));
             }
         });
         return;
@@ -91,6 +99,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}/`);
-    console.log(`CMS running at http://localhost:${PORT}/cms.html`);
+    console.log(`Server berjalan di http://localhost:${PORT}/`);
+    console.log(`CMS berjalan di http://localhost:${PORT}/cms.html`);
 });

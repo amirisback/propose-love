@@ -1,0 +1,26 @@
+{
+  "title": "Our Timeline",
+  "subtitle": "Bagaimana takdir mempertemukan kita...",
+  "events": [
+    {
+      "title": "Pertama Kali Bertemu",
+      "date": "14 Februari 2021",
+      "description": "Masih ingat momen ini? Hari di mana pandanganku tidak bisa lepas dari senyum manismu. Sejak detik itu, aku tahu ada yang spesial dari dirimu."
+    },
+    {
+      "title": "Kencan Pertama Kita",
+      "date": "28 Februari 2021",
+      "description": "Kita menghabiskan waktu berjam-jam mengobrol, tertawa, dan berbagi cerita. Waktu terasa berhenti saat bersamamu."
+    },
+    {
+      "title": "Menjadi Sepasang Kekasih",
+      "date": "15 April 2021",
+      "description": "Hari di mana kamu berkata \"Iya\". Itu adalah salah satu hari paling membahagiakan dalam hidupku."
+    },
+    {
+      "title": "Tumbuh Bersama",
+      "date": "2021 - Sekarang",
+      "description": "Begitu banyak memori, tawa, air mata, dan pelajaran yang kita lalui bersama. Kamu membuatku menjadi pria yang lebih baik."
+    }
+  ]
+}

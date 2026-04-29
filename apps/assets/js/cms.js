@@ -2,8 +2,21 @@ let currentData = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch('/apps/data/content.json');
-        currentData = await response.json();
+        const [heroRes, timelineRes, galleryRes, reasonsRes, proposalRes] = await Promise.all([
+            fetch('/apps/data/hero.json'),
+            fetch('/apps/data/timeline.json'),
+            fetch('/apps/data/gallery.json'),
+            fetch('/apps/data/reasons.json'),
+            fetch('/apps/data/proposal.json')
+        ]);
+        
+        currentData = {
+            hero: await heroRes.json(),
+            timeline: await timelineRes.json(),
+            gallery: await galleryRes.json(),
+            reasons: await reasonsRes.json(),
+            proposal: await proposalRes.json()
+        };
         
         // Populate Hero
         document.getElementById('hero-title').value = currentData.hero.title;
