@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('hero-title').textContent = data.hero.title;
         document.getElementById('hero-description').textContent = data.hero.description;
         document.getElementById('hero-scroll-text').textContent = data.hero.scrollText;
+        document.getElementById('footer-text').textContent = data.hero.footerText;
         
         // Populate Timeline
         document.getElementById('timeline-title').textContent = data.timeline.title;

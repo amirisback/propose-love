@@ -10,15 +10,15 @@
         body { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 pb-20">
 
-    <div class="max-w-4xl mx-auto p-6">
+    <div class="max-w-5xl mx-auto p-6">
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-rose-600">Propose Love CMS</h1>
             <a href="/" target="_blank" class="text-blue-500 hover:underline">View Website &rarr;</a>
         </div>
 
-        <div id="status-message" class="hidden mb-6 p-4 rounded-lg"></div>
+        <div id="status-message" class="hidden mb-6 p-4 rounded-lg sticky top-4 z-50 shadow-md transition-all"></div>
 
         <form id="cms-form" class="space-y-8">
             <!-- Hero Section -->
@@ -37,7 +37,67 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
                         <textarea id="hero-description" rows="3" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required></textarea>
                     </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Footer Text</label>
+                        <input type="text" id="hero-footerText" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <h2 class="text-xl font-bold text-gray-700">Timeline Section</h2>
+                    <button type="button" id="add-timeline-btn" class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1 rounded text-sm font-medium transition-colors">+ Add Event</button>
+                </div>
+                <div class="grid gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Section Title</label>
+                        <input type="text" id="timeline-title" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Section Subtitle</label>
+                        <input type="text" id="timeline-subtitle" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                </div>
+                <!-- Container for dynamic items -->
+                <div id="timeline-container" class="space-y-4"></div>
+            </div>
+
+            <!-- Gallery Section -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <h2 class="text-xl font-bold text-gray-700">Gallery Section</h2>
+                    <button type="button" id="add-gallery-btn" class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1 rounded text-sm font-medium transition-colors">+ Add Photo</button>
+                </div>
+                <div class="grid gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Section Title</label>
+                        <input type="text" id="gallery-title" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Section Subtitle</label>
+                        <input type="text" id="gallery-subtitle" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                </div>
+                <!-- Container for dynamic items -->
+                <div id="gallery-container" class="space-y-4 grid sm:grid-cols-2 gap-4"></div>
+            </div>
+
+            <!-- Reasons Section -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <h2 class="text-xl font-bold text-gray-700">Reasons Section</h2>
+                    <button type="button" id="add-reasons-btn" class="bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1 rounded text-sm font-medium transition-colors">+ Add Reason</button>
+                </div>
+                <div class="grid gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Section Title</label>
+                        <input type="text" id="reasons-title" class="w-full border border-gray-300 rounded-md p-2 focus:ring-rose-500 focus:border-rose-500" required>
+                    </div>
+                </div>
+                <!-- Container for dynamic items -->
+                <div id="reasons-container" class="space-y-4 grid sm:grid-cols-2 gap-4"></div>
             </div>
 
             <!-- Proposal Section -->
@@ -59,18 +119,13 @@
                 </div>
             </div>
 
-            <!-- Full Raw JSON Editor (For complex arrays like Timeline, Gallery, Reasons) -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <h2 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Advanced: Edit Arrays (JSON)</h2>
-                <p class="text-sm text-gray-500 mb-2">Edit Timeline, Gallery, and Reasons directly in JSON format below. Make sure the JSON syntax is valid (no trailing commas, use double quotes).</p>
-                <textarea id="raw-json" rows="20" class="w-full font-mono text-sm border border-gray-300 rounded-md p-4 bg-gray-50 focus:ring-rose-500 focus:border-rose-500"></textarea>
-            </div>
-
             <!-- Submit Button -->
-            <div class="sticky bottom-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200 flex justify-end">
-                <button type="submit" id="save-btn" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-6 rounded-md transition-colors flex items-center">
-                    <span>Simpan Data & Push ke GitHub</span>
-                </button>
+            <div class="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] flex justify-center z-50">
+                <div class="max-w-4xl w-full flex justify-end">
+                    <button type="submit" id="save-btn" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-8 rounded-lg transition-colors flex items-center shadow-md">
+                        <span>Simpan Data & Push ke GitHub</span>
+                    </button>
+                </div>
             </div>
         </form>
     </div>
