@@ -17,11 +17,11 @@ A beautiful, interactive, and customizable website template for proposing to you
 
 ### Main Website
 Navigate to `http://localhost:3000/` to see the magic happen.
-![Main Website Demo](docs\images\main_website_demo_1777425609078.webp)
+![Main Website Demo](docs/images/main_website_demo_1777425609078.webp)
 
 ### CMS Interface
 The Visual Editor makes customizing the website incredibly easy!
-![CMS Demo](docs\images\cms_interface_demo_1777425700534.webp)
+![CMS Demo](docs/images/cms_interface_demo_1777425700534.webp)
 
 ## How to Run
 
