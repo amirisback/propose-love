@@ -17,11 +17,11 @@ A beautiful, interactive, and customizable website template for proposing to you
 
 ### Main Website
 Navigate to `http://localhost:3000/` to see the magic happen.
-![Main Website Demo](file:///C:/Users/tech/.gemini/antigravity/brain/1a3525c5-e15a-492d-88d7-106e24cb3116/main_website_demo_1777425609078.webp)
+![Main Website Demo](docs\images\main_website_demo_1777425609078.webp)
 
 ### CMS Interface
 The Visual Editor makes customizing the website incredibly easy!
-![CMS Demo](file:///C:/Users/tech/.gemini/antigravity/brain/1a3525c5-e15a-492d-88d7-106e24cb3116/cms_interface_demo_1777425700534.webp)
+![CMS Demo](docs\images\cms_interface_demo_1777425700534.webp)
 
 ## How to Run
 
